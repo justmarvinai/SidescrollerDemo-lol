@@ -1,5 +1,9 @@
+:root { color-scheme: dark; }
 html, body { margin: 0; height: 100%; background: #0e0b16; overflow: hidden; touch-action: none; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
-#stage { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; }
+#stage {
+  position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; box-sizing: border-box;
+  padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+}
 #game { image-rendering: pixelated; image-rendering: crisp-edges; display: block; background: #0e0b16; }
 
 /* on-screen controls: hidden until a touch device is detected */
@@ -21,6 +25,6 @@ body.touch #touch { display: block; }
 #touch .b2 { margin-bottom: 58px; width: 50px; height: 50px; }
 #touch .b3 { margin-bottom: 66px; width: 50px; height: 50px; }
 @media (orientation: portrait) {
-  #stage { align-items: flex-start; padding-top: max(8px, env(safe-area-inset-top)); }
+  #stage { align-items: flex-start; padding-top: max(8px, env(safe-area-inset-top, 0px)); }
   #touch .mid { top: auto; bottom: 170px; left: 50%; right: auto; transform: translateX(-50%); flex-direction: row; }
 }

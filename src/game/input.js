@@ -8,7 +8,7 @@ const KEYS = {
   KeyK: 'spell', KeyV: 'spell',
   KeyE: 'interact', Enter: 'interact',
   KeyQ: 'potion', KeyH: 'potion',
-  Escape: 'pause', KeyP: 'pause', KeyM: 'mute',
+  Escape: 'pause', KeyP: 'pause', KeyM: 'mute', KeyF: 'fullscreen',
 };
 const PAD = { 0: 'jump', 2: 'attack', 1: 'dash', 3: 'spell', 4: 'interact', 5: 'potion', 9: 'pause', 14: 'left', 15: 'right', 12: 'up', 13: 'down' };
 

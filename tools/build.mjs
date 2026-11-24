@@ -25,3 +25,11 @@ const html = `<!doctype html>
 await mkdir(resolve(root, 'dist'), { recursive: true });
 await writeFile(resolve(root, 'dist/mosslight.html'), html);
 console.log(`dist/mosslight.html  ${(html.length / 1024).toFixed(1)} kB`);
+
+// Same game as a body fragment, for hosts that supply their own <html> wrapper.
+const fragment = `<title>Mosslight Pixel RPG</title>
+<style>${css}</style>
+<div id="stage"><canvas id="game" width="320" height="180"></canvas></div>
+<script>${js}</script>
+`;
+await writeFile(resolve(root, 'dist/mosslight.fragment.html'), fragment);

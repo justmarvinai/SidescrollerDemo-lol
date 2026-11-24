@@ -75,9 +75,38 @@ export class Game {
     this.audio.music(tx > 60 ? 'forest' : 'village');
   }
 
+  // Progress snapshot, so a page reload that hands the snapshot back can resume at the last campfire.
+  save() {
+    const h = this.hero;
+    return {
+      v: 1, started: this.state !== 'title', quest: this.quest, flags: this.flags, boss: this.bossDefeated,
+      ended: !!(this.end && this.end.done), time: this.playTime, zone: this.zoneShown,
+      h: { lvl: h.lvl, xp: h.xp, xpNext: h.xpNext, maxHp: h.maxHp, hp: h.hp, maxMp: h.maxMp, mp: h.mp, atk: h.atk, coins: h.coins, potions: h.potions, hasSpell: h.hasSpell, kills: h.kills, checkpoint: h.checkpoint },
+    };
+  }
+  load(s) {
+    if (!s || s.v !== 1 || !s.started || !s.h || !s.h.checkpoint) return false;
+    const h = this.hero;
+    Object.assign(h, s.h);
+    h.hp = Math.max(1, h.hp); h.hpLag = h.hp;
+    h.x = h.checkpoint.x; h.y = h.checkpoint.y; h.safe = { x: h.x, y: h.y };
+    for (const n of h.scarf) { n.x = n.px = h.x; n.y = n.py = h.y - 14; }
+    this.quest = s.quest || this.quest; this.flags = s.flags || {}; this.zoneShown = s.zone ?? -1; this.playTime = s.time || 0;
+    for (const e of this.ents) if (e instanceof Campfire && e.x <= h.x + 40) e.lit = true;
+    if (s.boss) { this.bossDefeated = true; this.boss.dead = true; }
+    if (s.ended && this.shrine) {
+      this.end = { t: 999, shrine: this.shrine, done: true }; this.shrine.lit = true; this.dawnT = 1; this.dawn = 0.35;
+      for (const e of this.ents) if (e instanceof Campfire) e.lit = true;
+      this.audio.music('dawn');
+    }
+    this.state = 'play'; this.fade = 1;
+    this.cam.x = clamp(h.x - 160, EDGE, WORLD_W - VIEW_W - EDGE);
+    return true;
+  }
+
   // ------------------------------------------------------------ helpers used by entities
   sfx(name) { this.audio.sfx(name); }
-  shake(n) { this.shakeT = Math.max(this.shakeT, n); }
+  shake(n) { if (!this.opts.calm) this.shakeT = Math.max(this.shakeT, n); }
   hitstop(n) { this.hitstopT = Math.max(this.hitstopT, n); }
   toast(text, color) { this.toastInfo = { text, color, t: 0, dur: 170 }; }
   banner(title, sub, color, dur = 210) { this.bannerInfo = { title, sub, color, t: 0, dur }; }

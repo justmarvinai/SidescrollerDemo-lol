@@ -44,7 +44,7 @@ That writes `dist/mosslight.html` (about 140 kB), which runs straight from disk.
 | Ember Spark, once found | `K` / `V` | Y |
 | Talk / use / rest | `E` / `Enter` | LB |
 | Drink tonic | `Q` / `H` | RB |
-| Pause, mute | `Esc`, `M` | Start |
+| Pause, mute, fullscreen | `Esc`, `M`, `F` | Start |
 
 Touch devices get on-screen buttons.
 
