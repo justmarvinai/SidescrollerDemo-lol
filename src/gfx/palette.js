@@ -12,6 +12,9 @@ export const RAMPS = {
   u: ['#111433', '#1a2356', '#243c8c', '#3767c2', '#579be4', '#8fcdf4', '#d2f0fb'],
   p: ['#22123a', '#3a1c5a', '#602d8c', '#8b45bb', '#ba74e2', '#e3b5f8'],
   m: ['#77285a', '#b53c6d', '#e56780', '#f6a097', '#fcd2bf'],
+  // sand and shallow sea, added for the top-down beach demo
+  d: ['#6b5444', '#8f7358', '#b4966b', '#d4ba84', '#ebd8a3', '#f8edc8'],
+  a: ['#103a5e', '#176282', '#1f8ca0', '#3dbab4', '#84dfc8', '#cbf6e2'],
 };
 
 // P: name -> hex, C: name -> palette index (index 0 is transparent)

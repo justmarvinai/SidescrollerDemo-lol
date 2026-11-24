@@ -36,13 +36,15 @@ export class Audio {
     o.connect(g); g.connect(out || this.sfxGain);
     o.start(t); o.stop(t + dur + 0.02);
   }
-  noise(dur, { vol = 0.2, freq = 1200, q = 0.8, slide = 1, type = 'bandpass', when = 0, out = null } = {}) {
+  noise(dur, { vol = 0.2, freq = 1200, q = 0.8, slide = 1, type = 'bandpass', when = 0, out = null, attack = 0 } = {}) {
     const c = this.ctx; if (!c) return;
     const t = c.currentTime + when;
     const s = c.createBufferSource(); s.buffer = this.noiseBuf; s.loop = true;
     const f = c.createBiquadFilter(); f.type = type; f.frequency.setValueAtTime(freq, t); f.Q.value = q;
     if (slide !== 1) f.frequency.exponentialRampToValueAtTime(Math.max(40, freq * slide), t + dur);
-    const g = c.createGain(); g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(0.0008, t + dur);
+    const g = c.createGain();
+    if (attack) { g.gain.setValueAtTime(0.0008, t); g.gain.linearRampToValueAtTime(vol, t + attack); } else g.gain.setValueAtTime(vol, t);
+    g.gain.exponentialRampToValueAtTime(0.0008, t + dur);
     s.connect(f); f.connect(g); g.connect(out || this.sfxGain);
     s.start(t, Math.random() * 0.3); s.stop(t + dur + 0.02);
   }
@@ -111,7 +113,7 @@ export class Audio {
 }
 
 const _ = null;
-const SONGS = {
+export const SONGS = {
   // warm and unhurried, D major
   village: {
     bpm: 92, len: 64, leadType: 'square', leadVol: 0.055, leadLen: 3,

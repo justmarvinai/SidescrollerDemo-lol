@@ -1,8 +1,8 @@
 {
-  "name": "mosslight",
+  "name": "pixel-art-demos",
   "version": "0.1.0",
   "private": true,
-  "description": "Mosslight - a tiny side-scrolling pixel-art action RPG. Every pixel is generated from code, no image assets.",
+  "description": "Two pixel-art game demos with no image assets: Mosslight (side-scrolling RPG) and Wrackline (top-down incremental). Every pixel is generated from code.",
   "type": "module",
   "scripts": {
     "start": "node tools/serve.mjs",

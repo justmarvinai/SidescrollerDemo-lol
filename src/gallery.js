@@ -12,12 +12,13 @@ const sections = [];
 export function section(name, items) { sections.push({ name, items }); }
 
 async function load() {
-  const mods = ['./gfx/art-hero.js', './gfx/art-chars.js', './gfx/art-props.js', './gfx/art-bg.js', './gfx/terrain.js', './gfx/ui.js'];
+  // ?mods=a.js,b.js swaps in another demo's art modules (paths relative to this file)
+  const mods = q.get('mods') ? q.get('mods').split(',') : ['./gfx/art-hero.js', './gfx/art-chars.js', './gfx/art-props.js', './gfx/art-bg.js', './gfx/terrain.js', './gfx/ui.js'];
   for (const m of mods) {
     try { const mod = await import(m); if (mod.gallery) mod.gallery(section); }
     catch (e) { if (!/Failed to fetch|404|not found/i.test(String(e))) console.error(m, e); }
   }
-  section('font', [{ label: 'main', draw: (g) => {
+  if (!q.get('mods')) section('font', [{ label: 'main', draw: (g) => {
     drawText(g, 'The quick brown fox jumps over the lazy dog.', 2, 2, { shadow: P.ink });
     drawText(g, 'THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG!', 2, 14, { color: P.y4, shadow: P.ink });
     drawText(g, "0123456789 +-*/=%#&()[]<>?!:;,.'\"_~ ♥★▶▼", 2, 26, { color: P.u6, outline: P.ink });
