@@ -1,0 +1,7 @@
+:root { color-scheme: dark; }
+html, body { margin: 0; height: 100%; background: #0e0b16; overflow: hidden; touch-action: none; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+#stage {
+  position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; box-sizing: border-box;
+  padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+}
+#game { image-rendering: pixelated; image-rendering: crisp-edges; display: block; background: #0e0b16; cursor: crosshair; touch-action: none; }

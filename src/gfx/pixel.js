@@ -162,6 +162,19 @@ export class Pix {
     return p;
   }
   pad(n) { const p = new Pix(this.w + n * 2, this.h + n * 2); p.blit(this, n, n); return p; }
+  // Scale2x (EPX): doubles the size while keeping diagonals smooth. Used before rotating sprites.
+  scale2x() {
+    const p = new Pix(this.w * 2, this.h * 2);
+    for (let y = 0; y < this.h; y++) for (let x = 0; x < this.w; x++) {
+      const e = this.d[y * this.w + x], b = this.get(x, y - 1), d = this.get(x - 1, y), f = this.get(x + 1, y), h = this.get(x, y + 1);
+      const o = (y * 2) * p.w + x * 2;
+      p.d[o] = d === b && b !== f && d !== h ? d : e;
+      p.d[o + 1] = b === f && b !== d && f !== h ? f : e;
+      p.d[o + p.w] = d === h && d !== b && h !== f ? d : e;
+      p.d[o + p.w + 1] = h === f && d !== h && b !== f ? f : e;
+    }
+    return p;
+  }
   remap(map) {
     const p = this.clone();
     for (let i = 0; i < p.d.length; i++) { const v = p.d[i]; if (v && map[v] !== undefined) p.d[i] = map[v]; }

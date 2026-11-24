@@ -2,7 +2,7 @@
   "name": "pixel-art-demos",
   "version": "0.1.0",
   "private": true,
-  "description": "Two pixel-art game demos with no image assets: Mosslight (side-scrolling RPG) and Wrackline (top-down incremental). Every pixel is generated from code.",
+  "description": "Three pixel-art game demos with no image assets: Mosslight (side-scrolling RPG), Wrackline (top-down incremental) and Flamingo Drive (overhead crime sandbox). Every pixel is generated from code.",
   "type": "module",
   "scripts": {
     "start": "node tools/serve.mjs",

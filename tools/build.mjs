@@ -8,6 +8,7 @@ const root = resolve(fileURLToPath(new URL('..', import.meta.url)));
 const games = [
   { name: 'mosslight', entry: 'src/main.js', css: 'src/style.css', title: 'Mosslight', hosted: 'Mosslight Pixel RPG' },
   { name: 'wrackline', entry: 'wrackline/src/main.js', css: 'wrackline/style.css', title: 'Wrackline', hosted: 'Wrackline Beachcomber' },
+  { name: 'flamingo', entry: 'flamingo/src/main.js', css: 'flamingo/style.css', title: 'Flamingo Drive', hosted: 'Flamingo Drive', w: 384, h: 216 },
 ];
 
 await mkdir(resolve(root, 'dist'), { recursive: true });
@@ -15,7 +16,7 @@ for (const g of games) {
   const out = await build({ entryPoints: [resolve(root, g.entry)], bundle: true, minify: true, format: 'iife', target: 'es2020', write: false });
   const js = out.outputFiles[0].text.replace(/<\/script/g, '<\\/script');
   const css = await readFile(resolve(root, g.css), 'utf8');
-  const body = `<div id="stage"><canvas id="game" width="320" height="180"></canvas></div>\n<script>${js}</script>\n`;
+  const body = `<div id="stage"><canvas id="game" width="${g.w || 320}" height="${g.h || 180}"></canvas></div>\n<script>${js}</script>\n`;
   const html = `<!doctype html>
 <html lang="en">
 <head>

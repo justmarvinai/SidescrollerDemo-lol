@@ -11,7 +11,7 @@ export const GOLD = [P.y6, P.y5, P.y4, P.y3];
 export const LEAVES = [[P.g5, P.g4], [P.g6, P.g4], [P.y3, P.y2], [P.r4, P.r3]];
 
 export class Particles {
-  constructor() { this.p = []; this.texts = []; }
+  constructor(vw = 320, vh = 180) { this.p = []; this.texts = []; this.vw = vw; this.vh = vh; }
   add(o) {
     const q = { x: 0, y: 0, vx: 0, vy: 0, life: 30, g: 0, drag: 1, size: 1, colors: DUST, em: false, flutter: 0, shrink: false, ...o };
     q.max = q.life;
@@ -63,7 +63,7 @@ export class Particles {
       if (q.em !== em) continue;
       const k = 1 - q.life / q.max;
       const x = Math.round(q.x - camX), y = Math.round(q.y - camY);
-      if (x < -4 || y < -4 || x > 324 || y > 184) continue;
+      if (x < -4 || y < -4 || x > this.vw + 4 || y > this.vh + 4) continue;
       g.fillStyle = q.colors[Math.min(q.colors.length - 1, Math.floor(k * q.colors.length))];
       let s = q.size;
       if (q.shrink && k > 0.6) s = Math.max(1, s - 1);
