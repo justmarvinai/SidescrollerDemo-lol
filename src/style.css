@@ -1,0 +1,26 @@
+html, body { margin: 0; height: 100%; background: #0e0b16; overflow: hidden; touch-action: none; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+#stage { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; }
+#game { image-rendering: pixelated; image-rendering: crisp-edges; display: block; background: #0e0b16; }
+
+/* on-screen controls: hidden until a touch device is detected */
+#touch { display: none; position: fixed; inset: 0; pointer-events: none; font: 700 18px/1 ui-monospace, Menlo, Consolas, monospace; }
+body.touch #touch { display: block; }
+#touch > div { position: absolute; display: flex; gap: 10px; pointer-events: auto; }
+#touch .pad { left: max(14px, env(safe-area-inset-left)); bottom: max(18px, env(safe-area-inset-bottom)); }
+#touch .act { right: max(14px, env(safe-area-inset-right)); bottom: max(18px, env(safe-area-inset-bottom)); align-items: flex-end; }
+#touch .mid { top: max(10px, env(safe-area-inset-top)); right: max(14px, env(safe-area-inset-right)); gap: 8px; flex-direction: column; }
+#touch button {
+  width: 58px; height: 58px; border-radius: 50%; border: 2px solid rgba(246, 248, 244, .55); color: #f6f8f4;
+  background: rgba(27, 23, 38, .45); font: inherit; padding: 0; touch-action: none; -webkit-tap-highlight-color: transparent;
+}
+#touch button.on { background: rgba(251, 208, 74, .55); border-color: #fbd04a; }
+#touch .pad button { width: 64px; height: 64px; border-radius: 16px; }
+#touch .sm { width: 40px; height: 40px; font-size: 14px; }
+#touch .b0 { width: 68px; height: 68px; }
+#touch .b1 { margin-bottom: 34px; }
+#touch .b2 { margin-bottom: 58px; width: 50px; height: 50px; }
+#touch .b3 { margin-bottom: 66px; width: 50px; height: 50px; }
+@media (orientation: portrait) {
+  #stage { align-items: flex-start; padding-top: max(8px, env(safe-area-inset-top)); }
+  #touch .mid { top: auto; bottom: 170px; left: 50%; right: auto; transform: translateX(-50%); flex-direction: row; }
+}
