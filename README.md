@@ -54,15 +54,15 @@ Touch devices get on-screen buttons.
 - Time of day follows your progress: golden hour, dusk, night, and a sunrise when you win.
 - Three-hit sword combo, dash, a fire spell, tonics, XP and levels, coins, chests, campfire checkpoints.
 - Four villagers with portraits and dialogue, three enemy types, a two-phase boss.
-- Dynamic lighting, reflective water, parallax with six depth layers, weather particles, fireflies.
+- Dynamic lighting, reflective water, seven parallax layers (five behind, two in front), drifting leaves, fireflies.
 
 ## How the art is made
 
 | Technique | Where |
 |---|---|
-| One 60-colour palette of hue-shifted ramps; everything indexes into it | `src/gfx/palette.js` |
+| One 63-colour palette of hue-shifted ramps; everything indexes into it | `src/gfx/palette.js` |
 | Hand-drawn sprites written as ASCII grids, auto-outlined | `src/gfx/art-props.js`, `src/gfx/art-chars.js` |
-| Hero: hand-drawn head, torso and sword posed by a two-bone IK rig, 33 frames | `src/gfx/art-hero.js` |
+| Hero: hand-drawn head, torso and sword posed by a two-bone IK rig, 29 frames | `src/gfx/art-hero.js` |
 | Procedural painters for trees, cottages, pillars, the boss | `src/gfx/art-trees.js`, `src/gfx/art-props.js` |
 | Terrain skinned per pixel from the collision grid, so nothing tiles visibly | `src/gfx/terrain.js` |
 | Backdrops painted once in abstract colour slots, then re-coloured per mood | `src/gfx/art-bg.js` |
